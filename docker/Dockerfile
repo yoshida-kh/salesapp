@@ -4,7 +4,7 @@ WORKDIR /salesapp
 
 COPY docker/requirements.txt /
 
-RUN apk add --no-cache uwsgi uwsgi-python gcc linux-headers build-base
+RUN apk add --no-cache uwsgi uwsgi-python gcc linux-headers build-base mariadb-dev
 
 RUN pip install -r /requirements.txt
 

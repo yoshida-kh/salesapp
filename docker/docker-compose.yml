@@ -8,14 +8,20 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: salesapp
       MYSQL_USER: salesapp
+      MYSQL_PASSWORD: local_password
 
   django:
     build: .
     image: django
     environment:
       - DJANGO_SETTINGS_MODULE
+      - 'DATABASE_HOSTNAME=db'
+      - 'DATABASE_DATABASE=salesapp'
+      - 'DATABASE_USERNAME=salesapp'
+      - 'DATABASE_PASSWORD=local_password'
     volumes:
       - ../salesapp:/salesapp
     networks:
