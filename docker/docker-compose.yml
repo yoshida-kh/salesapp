@@ -36,6 +36,7 @@ services:
       - 8000:80
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ../salesapp/static:/static
     networks:
       - nginx_network
     depends_on:
