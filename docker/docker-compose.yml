@@ -3,8 +3,7 @@ version: '3.3'
 services:
   db:
     image: mysql:5.7
-    ports:
-      - 3306:3306
+    container_name: db
     volumes:
       - db_data:/var/lib/mysql
     environment:
@@ -12,16 +11,18 @@ services:
       MYSQL_DATABASE: salesapp
       MYSQL_USER: salesapp
       MYSQL_PASSWORD: local_password
+    networks:
+      - db_network
 
   django:
     build: .
     image: django
+    container_name: django
     environment:
-      - DJANGO_SETTINGS_MODULE
-      - 'DATABASE_HOSTNAME=db'
-      - 'DATABASE_DATABASE=salesapp'
-      - 'DATABASE_USERNAME=salesapp'
-      - 'DATABASE_PASSWORD=local_password'
+      DATABASE_HOSTNAME: db
+      DATABASE_DATABASE: salesapp
+      DATABASE_USERNAME: salesapp
+      DATABASE_PASSWORD: local_password
     volumes:
       - ../salesapp:/salesapp
     networks:
@@ -32,6 +33,7 @@ services:
 
   nginx:
     image: nginx:latest
+    container_name: nginx
     ports:
       - 8000:80
     volumes:
