@@ -6,11 +6,11 @@ from .models import Client, Person, Status, Sale
 class ClientAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "email", "tel", "note"]
     search_fields = ["name", "email", "tel"]
-
+    
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "email", "tel", "note"]
+    list_display = ["id", "name", "client", "email", "tel", "note"]
     search_fields = ["name", "email", "tel"]
 
 
@@ -21,5 +21,5 @@ class StatusAdmin(admin.ModelAdmin):
 
 @admin.register(Sale)
 class SaleAdmin(admin.ModelAdmin):
-    list_display = ["id", "name", "client", "date", "status", "note"]
+    list_display = ["id", "name", "person", "date", "status", "note"]
     search_fields = ["name", "client", "status"]

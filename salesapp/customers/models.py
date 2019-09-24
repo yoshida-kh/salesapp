@@ -16,6 +16,9 @@ class DetailBaseModel(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return self.name
+
 
 class Client(TimestampBaseModel, DetailBaseModel):
     address = models.CharField(max_length=1000)
