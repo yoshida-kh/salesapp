@@ -1,1 +1,71 @@
-dashboard
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_static %}
+
+{% block content %}
+
+    <h1>Sample Dashboards</h1>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div id="columnchart" style="height: 500px;"></div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div id="piechart" style="height: 500px;"></div>
+            </div>
+        </div>
+
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawColumnChart);
+
+        function drawColumnChart() {
+
+          var options = {
+            'title': 'Sales Chart',
+          };
+
+          // Monthly data
+          var data = google.visualization.arrayToDataTable([
+            ['Month', 'Sales'],
+            ['Jan', 65],
+            ['Feb', 59],
+            ['Mar', 80],
+            ['Apr', 81],
+            ['May', 56],
+            ['Jun', 55],
+            ['Jly', 48]
+          ]);
+
+          var stage = document.getElementById('columnchart');
+          var columnChart = new google.visualization.ColumnChart(stage);
+
+          columnChart.draw(data, options);
+        }
+
+      // google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawPieChart);
+
+      function drawPieChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Share', 'Suppliers'],
+          ['Huyndai',     11],
+          ['Honda',      2],
+          ['Ford',  2],
+          ['GM', 2],
+          ['Toyota',    7]
+        ]);
+
+        var options = {
+          title: 'Sales Share'
+        };
+
+        var pieChart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        pieChart.draw(data, options);
+      }
+
+    </script>
+    <!-- END Content -->
+
+{% endblock content %}
